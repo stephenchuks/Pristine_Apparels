@@ -2,8 +2,8 @@ from django.urls import path, include
 
 from product import views
 
-urlpattern = [
+urlpatterns = [
     path('latest-products/', views.LatestProductList.as_view()),
-    
+
 
 ]
