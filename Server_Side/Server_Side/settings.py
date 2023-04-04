@@ -46,8 +46,8 @@ INSTALLED_APPS = [
     'product',
 ]
 
-CORSE_ALLOWED_ORIGINS = [
-    "http://localhost:8080",
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:8000",
 ]
 
 MIDDLEWARE = [
