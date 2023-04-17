@@ -30,6 +30,7 @@
                 <div class="field">
                     <label>Password</label>
                     <div class="control">
+                        <button class="button is-dark">Log In</button>
 
                     </div>
                 </div>
