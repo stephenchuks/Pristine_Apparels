@@ -11,13 +11,13 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 
 from .models import Order, OrderItem
-from .serializers import OrderSerializer
+from .serializers import OrderSerializer, MyOrderItemSerializer
 
 @api_view(['POST'])
 @authentication_classes([authentication.TokenAuthentication])
-@permission_classes([permission.IsAuthenticated])
+@permission_classes([permissions.IsAuthenticated])
 def checkout(request):
-    serializer = OrderSerializer 
+    serializer = OrderSerializer(data=request.data)
 
     if serializer.is_valid():
         stripe.api_key = settings.STRIPE_SECRET_KEY
@@ -25,10 +25,10 @@ def checkout(request):
 
         try:
             charge = stripe.Charge.create(
-                amount=int(paid_amount * 100)
-                currency='USD'
-                description='charge from Pristine Apparels'
-                sources=serializer.validated_data['stripe_token']
+                amount=int(paid_amount * 100),
+                currency='USD',
+                description='charge from Pristine Apparels',
+                source=serializer.validated_data['stripe_token']
             
             )
 
@@ -36,8 +36,17 @@ def checkout(request):
 
             return Response(serializer.data, status=status.HTTP_200_CREATED)
         except Exception:
-            return Response(serializer.errors, status=status.400_BAD_REQUEST)
+           return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         
-    return Response(serializer.errors, status=status.400_BAD_REQUEST)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class OrdersList(APIView):
+    authentication_classes = [authentication.TokenAuthentication]
+    permission_classes  = [permissions.IsAuthenticated]
+
+    def get(self, request, format=None):
+        orders = Order.objects.filter(user=request.user)
+        serializer = MyOrderItemSerializer(orders, many=True)
+        return Response(serializer.data)
 
         
