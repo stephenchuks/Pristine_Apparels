@@ -56,7 +56,7 @@ export default {
 
             this.$router.push('/')
         },
-        getMyOrders() {
+        async getMyOrders() {
           this.$store.commit('setIsLoading', true) 
           
           await axios
