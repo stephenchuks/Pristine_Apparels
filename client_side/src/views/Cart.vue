@@ -49,7 +49,7 @@ import CartItem from '@/components/CartItem.vue'
 export default {
     name: 'Cart',
     components: {
-        CartItem
+        CartItem,
     },
     data() {
         return {
