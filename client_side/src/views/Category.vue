@@ -7,7 +7,7 @@
 
         
             <productBox
-        v-bind="product in category.products"
+        v-for="product in category.products"
         v-bind:key="product.id"
         v-bind:product="product" />
         </div>
@@ -45,12 +45,12 @@ export default {
     methods: {
        async getCategory() {
 
-        const categorySlug = this.$route.paramas. category_slug
+        const categorySlug = this.$route.params.category_slug
 
         this.$store.commit('setIsLoading', true)
 
         axios
-            .get(`/api/vi/products/${categorySlug}/`)
+            .get(`/api/v1/products/${categorySlug}/`)
             .then(response => {
                 this.category = response.data
 

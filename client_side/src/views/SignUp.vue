@@ -101,6 +101,7 @@
                                 for (const property in error.response.data) {
                                 this.errors.push('${property}: $error.response.data[property]')
                                 }
+                                console.log(JSON.stringify(error.response.data))
 
                                 console.log(JSON.stringify(error.response.data))
                             } else if (error.message){
