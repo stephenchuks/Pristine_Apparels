@@ -15,8 +15,8 @@
       <div class="column is-12">
         <h2 class="is-size-2 has-text-centered">Latest Products</h2>
       </div>
-      <productBox
-        v-bind="product in latestProducts"
+      <ProductBox 
+        v-for="product in latestProducts"
         v-bind:key="product.id"
         v-bind:product="product" />
         

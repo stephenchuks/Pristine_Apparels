@@ -1,9 +1,10 @@
 <template>
     <div class="page-cart">
-        <div class="column is-multiline">
+        <div class="columns is-multiline">
             <div class="column is-12">
-                <h1 class="title"> Cart</h1>
+                <h1 class="title">Cart</h1>
             </div>
+
             <div class="column is-12 box">
                 <table class="table is-fullwidth" v-if="cartTotalLength">
                     <thead>
@@ -12,6 +13,7 @@
                             <th>Price</th>
                             <th>Quantity</th>
                             <th>Total</th>
+                            <th></th>
                         </tr>
                     </thead>
 
@@ -24,16 +26,17 @@
                     </tbody>
                 </table>
 
-                <p v-else> You don't have any product in your cart ...</p>
+                <p v-else>You don't have any products in your cart...</p>
             </div>
 
             <div class="column is-12 box">
                 <h2 class="subtitle">Summary</h2>
 
                 <strong>${{ cartTotalPrice.toFixed(2) }}</strong>, {{ cartTotalLength }} items
+
                 <hr>
 
-                <router-link to="/cart/checktout" class="button is-dark">Proceed to Checkout</router-link>
+                <router-link to="/cart/checkout" class="button is-dark">Proceed to checkout</router-link>
             </div>
         </div>
     </div>
@@ -42,15 +45,17 @@
 <script>
 import axios from 'axios'
 import CartItem from '@/components/CartItem.vue'
-export default{
+
+export default {
     name: 'Cart',
     components: {
-        CartItem
-
+        CartItem,
     },
     data() {
         return {
-            cart: []
+            cart: {
+                items: []
+            }
         }
     },
     mounted() {
@@ -58,23 +63,20 @@ export default{
     },
     methods: {
         removeFromCart(item) {
-            this.cart.item = this.cart.item.filter(i => i.product.id)
+            this.cart.items = this.cart.items.filter(i => i.product.id !== item.product.id)
         }
-
     },
     computed: {
         cartTotalLength() {
-            return this.cart.items.reduce((acc, curVal) =>{
+            return this.cart.items.reduce((acc, curVal) => {
                 return acc += curVal.quantity
             }, 0)
         },
         cartTotalPrice() {
-            return this.cart.items.reduce((acc, curVal) =>{
+            return this.cart.items.reduce((acc, curVal) => {
                 return acc += curVal.product.price * curVal.quantity
             }, 0)
         },
-    },
-
-
+    }
 }
 </script>
