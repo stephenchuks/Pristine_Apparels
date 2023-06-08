@@ -36,7 +36,7 @@ Welcome to the Client Side of Pristine Apparels, a web application designed to p
 Contributions to this project are welcome! If you have any ideas or improvements, feel free to submit a pull request.
 
 ## Contact
-For any inquiries or issues, please reach out to the project owner: [Your Name](https://www.linkedin.com/in/chuks-humphrey-stephen-614907165/).
+For any inquiries or issues, please reach out to the project owner: [Chuks Stephen](https://www.linkedin.com/in/chuks-humphrey-stephen-614907165/).
 
 
 
