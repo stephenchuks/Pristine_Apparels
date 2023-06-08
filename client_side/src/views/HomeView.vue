@@ -1,14 +1,17 @@
 <template>
   <div class="home">
     <section class="hero is-medium is-dark mb-6">
-      <div class="hero-body has-text-centered">
-        <p class="title mb-6">
-          Welcome to Pristine Apparels
-        </p>
-        <p class="subtitle">
-          The Best Online Mall
-        </p>
-
+      <div class="image-container">
+        <img src="../../public/banner.jpg">
+        <div class="overlay"></div> <!-- Add the overlay div -->
+        <div class="overlay-text">
+          <p class="title mb-6">
+            Welcome to Pristine Apparels
+          </p>
+          <p class="subtitle">
+            The Best Online Mall
+          </p>
+        </div>
       </div>
     </section>
     <div class="columns is-multiline">
@@ -62,4 +65,27 @@ export default {
 }
 </script>
 
+<style>
+.image-container {
+  position: relative;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Adjust the opacity as needed */
+}
+
+.overlay-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: white;
+}
+</style>
 
